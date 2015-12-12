@@ -1,0 +1,17 @@
+package pl.jjsolutions.ruleengine.model.condition.impl;
+
+import pl.jjsolutions.ruleengine.model.condition.RuleCondition;
+import pl.jjsolutions.ruleengine.model.rule.RuleEvaluationContext;
+
+public class NullCondition implements RuleCondition {
+
+    private String key;
+
+    public NullCondition(String key) {
+        this.key = key;
+    }
+
+    public boolean matches(RuleEvaluationContext context) {
+        return context.hasKey(key) && context.getValue(key) == null;
+    }
+}
