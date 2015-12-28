@@ -41,7 +41,7 @@ public class InclusiveRangeRuleCondition<T extends Comparable<T>> implements Con
         boolean result = false;
 
         if (context.hasKey(key)) {
-            Object contextValue = context.getValue(key);
+            Comparable contextValue = context.getValue(key);
             try {
                 result = (contextValue != null && fitsInRange((T) contextValue));
             } catch(ClassCastException cce) {
@@ -52,7 +52,7 @@ public class InclusiveRangeRuleCondition<T extends Comparable<T>> implements Con
     }
 
     private boolean fitsInRange(T value) {
-        return (value.compareTo(minValue) == 1 && value.compareTo(maxValue) == -1);
+        return (value.compareTo(minValue) >= 0 && value.compareTo(maxValue) <= 0);
     }
 
     public Class<? extends Comparable> getValueType() {

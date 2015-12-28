@@ -36,7 +36,8 @@ public class DefaultEqualsRuleCondition<T extends Comparable<T>> implements Conf
             try {
                 result = (contextValue != null && evaluateValueEquality((T) contextValue));
             } catch (ClassCastException cce) {
-                LOG.error(String.format("Unable to cast context value %s to class %s", contextValue, value.getClass()));
+                LOG.error(String.format("Value %s of type %s found in context under %s key. Unable to evaluate equality because of type mismatch: %s",
+                        contextValue, contextValue.getClass(), key, this.toString()));
             }
         }
         return result;
@@ -48,5 +49,13 @@ public class DefaultEqualsRuleCondition<T extends Comparable<T>> implements Conf
 
     public Class<? extends Comparable> getValueType() {
         return value.getClass();
+    }
+
+    @Override
+    public String toString() {
+        return "DefaultEqualsRuleCondition{" +
+                "key='" + key + '\'' +
+                ", value=" + value + ", valueType=" + value.getClass() +
+                '}';
     }
 }

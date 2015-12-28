@@ -1,6 +1,6 @@
 package pl.jjsolutions.ruleengine.model.rule;
 
 public interface RuleEvaluationContext {
-    Object getValue(String key);
+    Comparable getValue(String key);
     boolean hasKey(String key);
 }
